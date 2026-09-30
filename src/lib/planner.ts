@@ -1,6 +1,6 @@
 import type { Subject, Topic, TopicWithMastery, StudentProfile, PlanAllocation, TaskType, TaskPriority } from './types';
-import { enrichTopicWithMastery, getDaysUntilExamFromSubject } from './analyticsHelpers';
-import { isRevisionDue } from './mastery';
+import { getDaysUntilExamFromSubject } from './analyticsHelpers';
+import { enrichTopicWithMastery, isRevisionDue } from './mastery';
 
 // ============ TOPIC PRIORITY ENGINE ============
 // Replaces the naive "first incomplete topic" approach.

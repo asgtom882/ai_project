@@ -120,8 +120,24 @@ export function useStudentData(userId: string | null) {
   }, []);
 
   // ============ TASKS ============
-  const addTask = useCallback(async (data: Omit<Task, 'id' | 'created_at' | 'user_id' | 'status'>) => {
-    const { data: row } = await supabase.from('tasks').insert(data).select().single();
+  const addTask = useCallback(async (data: {
+    title: string;
+    subject_id: string | null;
+    topic_id: string | null;
+    description: string | null;
+    estimated_minutes: number;
+    due_date: string | null;
+    source: 'ai' | 'manual' | 'planner';
+    task_type?: string;
+    priority?: string;
+    reason?: string | null;
+  }) => {
+    const { data: row } = await supabase.from('tasks').insert({
+      ...data,
+      task_type: data.task_type ?? 'study',
+      priority: data.priority ?? 'medium',
+      reason: data.reason ?? null,
+    }).select().single();
     if (row) setTasks((prev) => [row as Task, ...prev]);
     return row;
   }, []);

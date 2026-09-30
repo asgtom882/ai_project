@@ -9,7 +9,7 @@ type Props = {
   topics: Topic[];
   sessions: StudySession[];
   tasks: Task[];
-  onAddTask: (data: { subject_id: string | null; topic_id: string | null; title: string; description: string | null; estimated_minutes: number; due_date: string | null; source: 'ai' | 'manual' }) => void;
+  onAddTask: (data: { subject_id: string | null; topic_id: string | null; title: string; description: string | null; estimated_minutes: number; due_date: string | null; source: 'ai' | 'manual' | 'planner'; task_type?: string; priority?: string; reason?: string | null }) => Promise<unknown>;
   onUpdateTask: (id: string, data: Partial<Task>) => void;
   onDeleteTask: (id: string) => void;
 };

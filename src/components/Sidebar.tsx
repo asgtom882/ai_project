@@ -1,10 +1,11 @@
-import { LayoutDashboard, BookOpen, Timer, CheckSquare, Map, Brain } from 'lucide-react';
+import { LayoutDashboard, BookOpen, Timer, CheckSquare, Map, Brain, LogOut } from 'lucide-react';
 
 export type View = 'dashboard' | 'subjects' | 'timer' | 'tasks' | 'roadmap';
 
 type Props = {
   active: View;
   onNavigate: (view: View) => void;
+  onSignOut: () => void;
 };
 
 const NAV_ITEMS: { id: View; label: string; icon: typeof LayoutDashboard }[] = [
@@ -15,7 +16,7 @@ const NAV_ITEMS: { id: View; label: string; icon: typeof LayoutDashboard }[] = [
   { id: 'roadmap', label: 'AI Roadmap', icon: Map },
 ];
 
-export default function Sidebar({ active, onNavigate }: Props) {
+export default function Sidebar({ active, onNavigate, onSignOut }: Props) {
   return (
     <aside className="w-64 shrink-0 bg-white border-r border-gray-200 flex flex-col h-screen sticky top-0">
       <div className="px-6 py-6 border-b border-gray-100">
@@ -51,13 +52,20 @@ export default function Sidebar({ active, onNavigate }: Props) {
         })}
       </nav>
 
-      <div className="px-4 py-4 border-t border-gray-100">
+      <div className="px-4 py-4 border-t border-gray-100 space-y-3">
         <div className="rounded-xl bg-gradient-to-br from-blue-50 to-cyan-50 border border-blue-100 p-4">
           <p className="text-xs font-semibold text-blue-900 mb-1">AI-Powered</p>
           <p className="text-xs text-blue-700 leading-relaxed">
             Get personalized roadmaps and daily task suggestions based on your progress.
           </p>
         </div>
+        <button
+          onClick={onSignOut}
+          className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-700 transition-colors"
+        >
+          <LogOut className="w-4 h-4" />
+          Sign Out
+        </button>
       </div>
     </aside>
   );
